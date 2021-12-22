@@ -9,9 +9,10 @@ var args = require('args');
 var config = null;
 
 args
-    .option('semver',   'major, minor or patch')
-    .option('display',  'displays the latest version')
-    .option('commit',   'determines if the code should be commited and pushed');
+    .option('semver', 'major, minor or patch')
+    .option('display', 'displays the latest version')
+    .option('commit', 'determines if the code should be commited and pushed')
+    .option('init', 'initializes a bump config file');
 
 const flags = args.parse(process.argv);
 
@@ -19,6 +20,19 @@ if (flags.display) {
     loadBumpConfig()
         .then(load)
         .then(displayVersion)
+} else if (flags.init) {
+    inquirer.prompt([{ type: 'input', name: 'version_path', message: 'Enter version path:' }])
+        .then(answers => {
+            config = {
+                version_path: answers.version_path
+            }
+            fs.writeFile('bump.json', JSON.stringify(config, null, 4), (err) => {
+                if (err) {
+                    console.log(chalk.red(err));
+                }
+                console.log(chalk.green('bump.json created successfully'));
+            });
+        });
 } else {
     loadBumpConfig()
         .then(inquire)
