@@ -176,7 +176,7 @@ function displayVersion(response) {
     var msg = `${versionStr}`;
 
     const data = [
-        ['New version', chalk.green(msg)],
+        ['Current version', chalk.blue(msg)],
     ];
 
     const config = {
