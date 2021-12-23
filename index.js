@@ -21,7 +21,7 @@ if (flags.display) {
         .then(load)
         .then(displayVersion)
 } else if (flags.init) {
-    inquirer.prompt([{ type: 'input', name: 'version_path', message: 'Enter version path:' }])
+    inquirer.prompt([{ type: 'input', name: 'version_path', message: 'Enter the path where to save the json sempath file:' }])
         .then(answers => {
             config = {
                 version_path: answers.version_path
@@ -136,20 +136,7 @@ function save(response) {
             ];
 
             const config = {
-                border: table.getBorderCharacters(`honeywell`),
-                columnDefault: {
-                    width: 20,
-                },
-                columnCount: 2,
-                columns: {
-                    0: {
-                        alignment: 'center',
-                    },
-                    1: {
-                        width: 20,
-                        alignment: 'center',
-                    },
-                },
+                border: table.getBorderCharacters(`honeywell`)
             };
 
             console.log(table.table(data, config));
@@ -168,20 +155,7 @@ function displayVersion(response) {
     ];
 
     const config = {
-        border: table.getBorderCharacters(`honeywell`),
-        columnDefault: {
-            width: 20,
-        },
-        columnCount: 2,
-        columns: {
-            0: {
-                alignment: 'center',
-            },
-            1: {
-                width: 20,
-                alignment: 'center',
-            },
-        },
+        border: table.getBorderCharacters(`honeywell`)
     };
 
     console.log(table.table(data, config));
