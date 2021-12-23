@@ -21,16 +21,20 @@ if (flags.display) {
         .then(load)
         .then(displayVersion)
 } else if (flags.init) {
-    inquirer.prompt([{ type: 'input', name: 'version_path', message: 'Enter the path where to save the json sempath file:' }])
-        .then(answers => {
+    inquirer.prompt(
+        [
+            { type: 'input', name: 'version_path', message: 'Enter the path where to save the json sempath file:' },
+            { type: 'confirm', name: 'update_package_json', message: 'Should the package json version also be updated?' }
+        ]).then(answers => {
             config = {
-                version_path: answers.version_path
+                version_path: answers.version_path,
+                update_package_json: answers.update_package_json
             }
             fs.writeFile('bump.json', JSON.stringify(config, null, 4), (err) => {
                 if (err) {
                     console.log(chalk.red(err));
                 }
-                console.log(chalk.green('bump.json created successfully'));
+                console.log(chalk.green('bump.json created successfully!'));
             });
         });
 } else {
@@ -38,6 +42,7 @@ if (flags.display) {
         .then(inquire)
         .then(load)
         .then(increment)
+        .then(updatePackageJson)
         .then(save)
         .then(commit)
         .catch(err => {
@@ -96,11 +101,13 @@ function load(answers) {
             if (err) {
                 resolve({
                     answers,
+                    config,
                     data: { major: 0, minor: 0, patch: 0 }
                 });
             } else {
                 resolve({
                     answers,
+                    config,
                     data: JSON.parse(data.toString())
                 });
             }
@@ -116,6 +123,24 @@ function increment(response) {
         if (response.answers.version === 'major') { response.data.minor = 0; response.data.patch = 0 }
         resolve(response)
     });
+}
+
+function updatePackageJson(response) {
+    if (response.config.update_package_json) {
+        var versionStr = `${response.data.major}.${response.data.minor}.${response.data.patch}`;
+        return runAsync(`npm version ${versionStr} --no-git-tag-version`)
+            .then(data => {
+                if (data.err) {
+                    throw new Error(data.stderr);
+                }
+                console.log(chalk.green(data.data));
+            })
+            .then(() => {
+                return response;
+            });
+    } else {
+        return Promise.resolve(response);
+    }
 }
 
 function save(response) {
