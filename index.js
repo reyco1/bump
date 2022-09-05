@@ -36,6 +36,12 @@ if (flags.display) {
                 }
                 console.log(chalk.green('bump.json created successfully!'));
             });
+            fs.writeFile(config.version_path, JSON.stringify({ major: 0, minor: 0, patch: 0 }, null, 4), (err) => {
+                if (err) {
+                    console.log(chalk.red(err));
+                }
+                console.log(chalk.green(`${config.version_path} created successfully!`));
+            });
         });
 } else {
     loadBumpConfig()
