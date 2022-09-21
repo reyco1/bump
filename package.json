@@ -1,6 +1,6 @@
 {
   "name": "@reyco1/bump",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Easy versioning for all your projects",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,10 @@
   },
   "bin": {
     "bump": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reyco1/bump.git"
   },
   "keywords": [],
   "author": "Rey Columna",
