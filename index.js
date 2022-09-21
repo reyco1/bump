@@ -23,9 +23,9 @@ if (flags.display) {
 } else if (flags.init) {
     inquirer.prompt(
         [
-            { type: 'input', name: 'version_path', message: 'Enter the path where to save the json sempath file:' },
+            { type: 'input', name: 'version_path', message: 'Enter the path where to save the json sempath file (e.i.: ./version.json):' },
             { type: 'confirm', name: 'update_package_json', message: 'Should the package json version also be updated?' }
-        ]).then(answers => {
+        ]).then(async answers => {
             config = {
                 version_path: answers.version_path,
                 update_package_json: answers.update_package_json
@@ -34,8 +34,31 @@ if (flags.display) {
                 if (err) {
                     console.log(chalk.red(err));
                 }
-                console.log(chalk.green('bump.json created successfully!'));
+                console.log(chalk.green('Bump config created successfully!'));
             });
+            // check if config.version_path includes directories
+            if (config.version_path.includes('/')) {
+                var dirs = config.version_path.split('/');
+                var file = dirs.pop();
+                var dir = dirs.join('/');
+                // check if the directory exists
+                if (!fs.existsSync(dir)) {
+                    // create the directory
+                    await runAsync(`mkdir -p ${dir}`)
+                        .then(data => {
+                            console.log(chalk.green(`Directory ${dir} created successfully!`));
+                        })
+                        .catch(err => {
+                            console.log(chalk.red(err));
+                        })
+                }
+            } else {
+                await runAsync(`touch ${config.version_path}`)
+                    .catch(err => {
+                        console.log(chalk.red(err));
+                    })
+            }
+
             fs.writeFile(config.version_path, JSON.stringify({ major: 0, minor: 0, patch: 0 }, null, 4), (err) => {
                 if (err) {
                     console.log(chalk.red(err));
