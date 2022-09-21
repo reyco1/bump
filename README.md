@@ -11,7 +11,10 @@ An easy to use cli to bump the [semver](http://semver.org/) version of a JSON fi
 
     npm i @reyco1/bump -g
 
-  
+After installation is complete. In order to add Bump to any project, go to the project root and run the following command and follow the instructions: 
+
+    bump --init
+
 ## Command-line example
 The following command will increment your patch version as well as ask you for a commit message and then commit your code prefixing the message with your complete version number and then publishes the code.
 
@@ -35,3 +38,14 @@ Usage: bump [options] [command]
 | **-h, --help** | Output usage information |
 | **-s, --semver** | major, minor or patch |
 | **-v, --version** | Output the bump tool version number |
+
+### License
+(MIT License)
+
+Copyright (c) 2023 Rey Columna  [hello@reyco.me](mailto:hello@reyco.me)  https://reyco.me
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
