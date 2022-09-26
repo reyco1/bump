@@ -1,5 +1,7 @@
 # @reyco1/bump
 
+[![GitHub license](https://img.shields.io/github/license/reyco1/bump)](https://github.com/reyco1/bump/blob/main/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/reyco1/bump)](https://github.com/reyco1/bump/issues)  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/reyco1/bump) ![npm](https://img.shields.io/npm/dw/@reyco1/bump) ![npm](https://img.shields.io/npm/v/@reyco1/bump)
+
 Bump is a simple yet powerful command line utility that allows you to maintain your projects [semver](http://semver.org/) version.
 
 You can configure it to update the version in a standalone json file as well as your package.json, and it can also automatically commit and publish the changes.
