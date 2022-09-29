@@ -1,6 +1,6 @@
 {
   "name": "@reyco1/bump",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "Easy versioning for all your projects",
   "main": "index.js",
   "scripts": {
