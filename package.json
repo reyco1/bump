@@ -1,6 +1,6 @@
 {
   "name": "@reyco1/bump",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Easy versioning for all your projects",
   "main": "index.js",
   "scripts": {
@@ -97,6 +97,7 @@
   "author": "Rey Columna",
   "license": "MIT",
   "dependencies": {
+    "@reyco1/bump": "^1.2.0",
     "args": "^5.0.1",
     "chalk": "^2.4.2",
     "fs": "0.0.1-security",
