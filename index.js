@@ -12,6 +12,7 @@ args
     .option('semver', 'major, minor or patch')
     .option('display', 'displays the latest version')
     .option('commit', 'determines if the code should be commited and pushed')
+    .option('tag', 'determines if the code should be tagged (only works if the commit flag is set)')
     .option('init', 'initializes a bump config file');
 
 const flags = args.parse(process.argv);
@@ -73,6 +74,7 @@ if (flags.display) {
         .then(increment)
         .then(updatePackageJson)
         .then(save)
+        .then(tag)
         .then(commit)
         .catch(err => {
             console.log(chalk.red(err.message));
@@ -213,6 +215,17 @@ function displayVersion(response) {
     };
 
     console.log(table.table(data, config));
+}
+
+function tag(response) {
+    if (flags.tag) {
+        return inquirer
+            .prompt([{ type: 'input', name: 'tag_message', message: 'Enter tag message:' }])
+            .then(answers => runAsync(`git tag -a v${response.versionStr})` + ` -m "${answers.tag_message}"`))
+            .then(_ => response);
+    } else {
+        return Promise.resolve(response);
+    }
 }
 
 function commit(response) {
