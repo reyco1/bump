@@ -222,8 +222,8 @@ function tag(response) {
         return inquirer
             .prompt([{ type: 'input', name: 'tag_message', message: 'Enter tag message:' }])
             .then(answers => {
-                var command = `git tag -a v${response.versionStr}) -m "${answers.tag_message}"`
-                chalk.green(command)
+                var command = `git tag -a ${response.versionStr} -m "${answers.tag_message}"`
+                console.log(chalk.green(command));
                 return runAsync(command)
             })
             .then(_ => response);
@@ -235,10 +235,15 @@ function tag(response) {
 function commit(response) {
     if (flags.commit) {
         return inquirer.prompt([{ type: 'input', name: 'commit_message', message: 'Enter commit message:' }])
-            .then(answers => runAsync(`git add .`, { answers }))
+            .then(answers => {
+                var command = `git add .`;
+                console.log(chalk.green(command));
+                return runAsync(command, { answers })
+                runAsync()
+            })
             .then(data => {
                 var command = `git commit -m "(${response.versionStr}) ${data.details.answers.commit_message}"`
-                chalk.green(command)
+                console.log(chalk.green(command));
                 return runAsync(command)
             })
             .then(_ => runAsync(`git push`));
