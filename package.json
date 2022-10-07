@@ -1,10 +1,10 @@
 {
   "name": "@reyco1/bump",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Easy versioning for all your projects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js --init"
   },
   "bin": {
     "bump": "./index.js"
@@ -100,7 +100,6 @@
     "@reyco1/bump": "^1.2.0",
     "args": "^5.0.1",
     "chalk": "^2.4.2",
-    "fs": "0.0.1-security",
     "inquirer": "^8.2.0",
     "node-cmd": "^3.0.0",
     "table": "^6.7.5"
