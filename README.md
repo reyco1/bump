@@ -53,7 +53,7 @@ Usage: bump [options] [command]
 | **-d, --display** | Displays the latest version |
 | **-h, --help** | Output usage information |
 | **-s, --semver** | major, minor or patch |
-| **-t, --tag** | determines if the code should be tagged (only works if the commit flag is set) |
+| **-t, --tag** | determines if the code should be tagged |
 | **-v, --version** | Output the bump tool version number |
   
 
